@@ -10,6 +10,10 @@ export default class ChromeBoisDomain extends Component {
      * function that has been provided and is already imported
      * (`drawChromeBoiAtCoords` expects two arguments, an x and a y coordinate)
      */
+    let xCoordinate = event.clientX
+    let yCoordinate = event.clientY
+
+    drawChromeBoiAtCoords(xCoordinate, yCoordinate)
   }
   
   /* TODO: Create an event handler which, when fired, invokes the provided
@@ -23,10 +27,22 @@ export default class ChromeBoisDomain extends Component {
   /* if the key pressed was 'a', then it should call `resize` with '+'
   /* if the key pressed was 's', then it should call `resize` with '-' 
    */
+
+  handleOnKeyDownCapture = (event) => {
+    let key = event.key
+
+    if (key === 'a') {
+      resize('+')
+    } else if (key === 's') {
+      resize('-')
+    }
+  }
   
   render() {
     return (
-      <canvas 
+      <canvas
+        onKeyDown={this.handleOnKeyDownCapture}
+        onClick={() => toggleCycling()}
         onMouseMove={this.handleMouseMove}
         width='900'
         height='600'
